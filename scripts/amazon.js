@@ -1,3 +1,7 @@
+// DISPLAY PRODUCTS
+// import { cart } from './checkout.js';
+var cart=[];
+import { products } from '../data/products.js';
 var productImage=document.querySelector('.product-image');
 var productName=document.querySelector('.product-name');
 var productStars=document.querySelector('product-rating-stars');
@@ -26,7 +30,7 @@ products.forEach((value,index) =>{
         <div class="product-price">₹${(value.priceCents/100).toFixed(2)}</div>
 
         <div class="product-quantity-container">
-        <select>
+        <select class="js-select-quantity${value.id}">
             <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -47,17 +51,48 @@ products.forEach((value,index) =>{
         Added
         </div>
 
-        <button class="add-to-cart-button button-primary">
+        <button class="add-to-cart-button button-primary" data-product-id=${value.id}>
         Add to Cart
         </button>
   </div>
     `;
     displayProducts += productConatiner;
-    // productImage.src=value.image;
-    // productName.innerHTML=value.name;
-    // productStars.src=value.rating.stars;
-    // productRate.innerHTML=value.rating.count;
-    // productPrice.innerHTML=value.Paisa;
 });
 allProducts.innerHTML=displayProducts;
 displayProducts='';
+
+
+
+// ADD TO CART
+var addToCartBtn=document.querySelectorAll('.add-to-cart-button');
+var totalQuantity=0;
+var cartQuantity=document.querySelector('.cart-quantity');
+var cartDisplayBtn=document.querySelector('.cart-link');
+addToCartBtn.forEach((button) => {
+    button.addEventListener('click',() => {
+        var id=button.dataset.productId;
+        var prodQuantity=document.querySelector('.js-select-quantity'+id);
+        totalQuantity += parseInt(prodQuantity.value);
+        if(Array.isArray(cart)){
+            cart.push({id:id,quantity:parseInt(prodQuantity.value)});
+        }
+        else{
+            cart.forEach((value,index) =>{
+                if(value.id===id){
+                    value.quantity + prodQuantity;
+                }
+                else{
+                    cart.push({id:id,quantity:parseInt(prodQuantity.value)});
+                }
+            });
+        }
+        cartQuantity.innerHTML=totalQuantity;
+        prodQuantity.value=1;
+        console.log(cart);
+        const url=`checkout.html?cart=${encodeURIComponent(JSON.stringify(cart))}`;
+        cartDisplayBtn.href=url;
+    });
+});
+
+
+
