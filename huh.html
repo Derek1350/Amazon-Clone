@@ -1,0 +1,68 @@
+<div class="cart-item-container">
+    <div class="delivery-date">
+        Delivery date: Tuesday, June 21
+    </div>
+
+    <div class="cart-item-details-grid">
+        <img class="product-image" src=${value.image}>
+
+        <div class="cart-item-details">
+            <div class="product-name">
+                ${value.name}
+            </div>
+            <div class="product-price">
+                ₹${(value.priceCents/100).toFixed(2)}
+            </div>
+            <div class="product-quantity">
+                <span>
+                    Quantity: <span class="quantity-label">${i.quantity}</span>
+                </span>
+                <span class="update-quantity-link link-primary" data-product-id=${i.id}>
+                    Update
+                </span>
+                <span class="delete-quantity-link link-primary" data-product-id=${i.id} data-product-quantity=${i.quantity}>
+                    Delete
+                </span>
+            </div>
+        </div>
+
+        <div class="delivery-options">
+            <div class="delivery-options-title">
+                Choose a delivery option:
+            </div>
+            <div class="delivery-option">
+                <input value='0' type="radio" checked class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}">
+                <div>
+                    <div class="delivery-option-date">
+                        ${i.date[0].dateOption1}
+                    </div>
+                    <div class="delivery-option-price">
+                        FREE Shipping
+                    </div>
+                </div>
+            </div>
+            <div class="delivery-option">
+                <input value='70' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}">
+                <div>
+                    <div class="delivery-option-date">
+                        ${i.date[0].dateOption2}
+                    </div>
+                    <div class="delivery-option-price">
+                        ₹70 - Shipping
+                    </div>
+                </div>
+            </div>
+            <div class="delivery-option">
+                <input value='100' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}">
+                <div>
+                    <div class="delivery-option-date">
+                        ${i.date[0].dateOption3}
+                    </div>
+                    <div class="delivery-option-price">
+                        ₹100 - Shipping
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
