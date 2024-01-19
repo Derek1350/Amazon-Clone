@@ -1,7 +1,6 @@
 // DISPLAY PRODUCTS
 import { products } from '../data/products.js';
 import { displayProducts,checkItemInCart,saveLocalStorage,retriveLocalStorage,clacDate } from "./func.js";
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 displayProducts(products);
 var receivedData=JSON.parse(retriveLocalStorage());
 var cart,totalQuantity;

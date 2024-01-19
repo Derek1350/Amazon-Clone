@@ -1,4 +1,5 @@
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
+
 export function displayProducts(products){
     var allProducts=document.querySelector('.products-grid');
     var productContainer='';
@@ -107,7 +108,7 @@ export function displayCart(products,cart){
                                 Choose a delivery option:
                             </div>
                             <div class="delivery-option">
-                                <input value='0' type="radio" checked class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}">
+                                <input value='0' type="radio" checked class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-Date=${i.date[0].dateOption1}>
                                 <div>
                                     <div class="delivery-option-date">
                                         ${i.date[0].dateOption1}
@@ -118,7 +119,7 @@ export function displayCart(products,cart){
                                 </div>
                             </div>
                             <div class="delivery-option">
-                                <input value='70' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}">
+                                <input value='70' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-Date=${i.date[0].dateOption2}>
                                 <div>
                                     <div class="delivery-option-date">
                                         ${i.date[0].dateOption2}
@@ -129,7 +130,7 @@ export function displayCart(products,cart){
                                 </div>
                             </div>
                             <div class="delivery-option">
-                                <input value='100' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}">
+                                <input value='100' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-Date=${i.date[0].dateOption3}>
                                 <div>
                                     <div class="delivery-option-date">
                                         ${i.date[0].dateOption3}
@@ -370,6 +371,10 @@ export function deleteProduct(products, cart, delBtn) {
     
     displayCart(products, JSON.parse(updatedPassedData[0].cart));
     calcPriceSummary(products);
+    location.reload();
+}
+export function returnToHome(){
+    window.location.href = 'amazon.html';
 }
 
 
