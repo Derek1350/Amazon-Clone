@@ -73,11 +73,16 @@ export function displayCart(products,cart){
     if(cart){
         products.forEach((value,index) => {
             cart.forEach((i,j) => {
+                const date=[{
+                    today:(i.date[0].dateOption1).toString(),
+                    afterThree:i.date[0].dateOption2.toString(),
+                    afterSeven:i.date[0].dateOption3.toString()
+                }]
                 if(i.id===value.id){
                     cartHtml +=`
                 <div class="cart-item-container">
                     <div class="delivery-date">
-                        Delivery date: Tuesday, June 21
+                    Delivery date: ${date[0].today}
                     </div>
                 
                     <div class="cart-item-details-grid">
@@ -107,8 +112,8 @@ export function displayCart(products,cart){
                             <div class="delivery-options-title">
                                 Choose a delivery option:
                             </div>
-                            <div class="delivery-option">
-                                <input value='0' type="radio" checked class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-Date=${i.date[0].dateOption1}>
+                                <div class="delivery-option">
+                                    <input value='0' type="radio" checked class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-date=${date[0].today}>
                                 <div>
                                     <div class="delivery-option-date">
                                         ${i.date[0].dateOption1}
@@ -119,7 +124,7 @@ export function displayCart(products,cart){
                                 </div>
                             </div>
                             <div class="delivery-option">
-                                <input value='70' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-Date=${i.date[0].dateOption2}>
+                                <input value='70' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-date=${date[0].afterThree}>
                                 <div>
                                     <div class="delivery-option-date">
                                         ${i.date[0].dateOption2}
@@ -130,7 +135,7 @@ export function displayCart(products,cart){
                                 </div>
                             </div>
                             <div class="delivery-option">
-                                <input value='100' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-Date=${i.date[0].dateOption3}>
+                                <input value='100' type="radio" class="delivery-option-input delivery-option-input-${i.id}" name="delivery-option-${i.id}" data-delivery-date=${date[0].afterSeven}>
                                 <div>
                                     <div class="delivery-option-date">
                                         ${i.date[0].dateOption3}
@@ -156,114 +161,9 @@ export function displayCart(products,cart){
         </div>
         `;
     }
-    
     allOrders.innerHTML=cartHtml;
 };
 
-// export function calcPriceSummary(products){
-//     var iniPayment=0;
-//     var afterTaxPayment,tax,beforeTax,priceSummary,shippingCost;
-//     var receivedData=JSON.parse(retriveLocalStorage());
-//     if(receivedData){
-//         var cart = JSON.parse(receivedData[0].cart);
-//         products.forEach((value,index) => {
-//             cart.forEach((i,j) =>{
-//                 if(value.id===i.id){
-//                     iniPayment += ((value.priceCents*i.quantity));      
-//                 }
-//             });
-//         });
-//         iniPayment /=100;
-//         products.forEach((value,index) => {
-//             cart.forEach((i,j) =>{
-//                 const shippingOption=document.querySelectorAll('.delivery-option-input-'+i.id);
-//                 shippingOption.forEach((value) =>{
-//                     value.addEventListener('click',()=>{
-//                         shippingCost = parseFloat(value.value);
-//                         beforeTax=parseFloat((iniPayment+shippingCost).toFixed(2));
-//                         tax=parseFloat((beforeTax*0.1).toFixed(2));
-//                         afterTaxPayment=parseFloat((beforeTax+tax).toFixed(2));
-//                         priceSummary=[{
-//                             iniPayment,
-//                             shippingCost,
-//                             beforeTax,
-//                             tax,
-//                             afterTaxPayment
-//                         }];
-//                         displayPriceSummary(priceSummary);
-//                     });
-//                 });
-//             });
-//         });
-//     }
-//     priceSummary=[{
-//         iniPayment:0,
-//         shippingCost:0,
-//         beforeTax:0,
-//         tax:0,
-//         afterTaxPayment:0
-//     }];
-//     displayPriceSummary(priceSummary);   
-// }
-
-// export function calcPriceSummary(products) {
-//     var iniPayment = 0;
-//     var afterTaxPayment, tax, beforeTax, priceSummary, shippingCost;
-//     var receivedData = JSON.parse(retriveLocalStorage());
-
-//     if (receivedData) {
-//         var cart = JSON.parse(receivedData[0].cart);
-
-//         products.forEach((value) => {
-//             cart.forEach((i) => {
-//                 if (value.id === i.id) {
-//                     iniPayment += value.priceCents * i.quantity;
-//                 }
-//             });
-//         });
-//         iniPayment /= 100;
-
-//         const shippingOptions = document.querySelectorAll('.delivery-option-input');
-//         shippingOptions.forEach((option) => {
-//             option.addEventListener('click', () => {
-//                 shippingCost = 0;
-//                 cart.forEach((i) => {
-//                     shippingCost += parseFloat(document.querySelector('.delivery-option-input-' + i.id + ':checked').value);
-//                 });
-//                 updatePriceSummary();
-//             });
-//         });
-
-//         shippingCost = 0;
-//         updatePriceSummary();
-        
-//     }
-
-//     priceSummary = [{
-//         iniPayment: 0,
-//         shippingCost: 0,
-//         beforeTax: 0,
-//         tax: 0,
-//         afterTaxPayment: 0
-//     }];
-//     displayPriceSummary(priceSummary);
-
-//     function updatePriceSummary() {
-//         beforeTax = parseFloat((iniPayment + shippingCost).toFixed(2));
-//         tax = parseFloat((beforeTax * 0.1).toFixed(2));
-//         afterTaxPayment = parseFloat((beforeTax + tax).toFixed(2));
-
-//         priceSummary = [{
-//             iniPayment,
-//             shippingCost,
-//             beforeTax,
-//             tax,
-//             afterTaxPayment
-//         }];
-
-//         displayPriceSummary(priceSummary);
-//     }
-// }
 export function calcPriceSummary(products) {
     var iniPayment = 0;
     var afterTaxPayment, tax, beforeTax, priceSummary, shippingCost;
@@ -303,17 +203,6 @@ export function calcPriceSummary(products) {
         displayPriceSummary(priceSummary);
     }
     
-
-    // function calculateTotalShippingCost(cart) {
-    //     let totalShippingCost = 0;
-    //     cart.forEach((i) => {
-    //         const selectedOption = document.querySelector('input[name="delivery-option-' + i.id + '"]:checked');
-    //         if (selectedOption) {
-    //             totalShippingCost += parseFloat(selectedOption.value);
-    //         }
-    //     });
-    //     return totalShippingCost;
-    // }
     function calculateTotalShippingCost(cart) {
         return cart.reduce((total, item) => {
             const selectedOption = document.querySelector(`input[name="delivery-option-${item.id}"]:checked`);
@@ -340,7 +229,7 @@ export function calcPriceSummary(products) {
 
 export function clacDate(){
     function formatDate(date){
-        return date.format('dddd,MMMM D');
+        return date.format('dddd,MMMM-D');
     }
     const today= dayjs();
     const date=[{
@@ -350,6 +239,19 @@ export function clacDate(){
     }];
     return date;
 }
+
+export function displayDate(){
+    document.querySelectorAll('.delivery-option-input').forEach(function(input) {
+        input.addEventListener('change', function() {
+            const selectedDate = this.dataset.deliveryDate;
+            console.log(selectedDate);
+            const cartItemContainer = this.closest('.cart-item-container');
+            const deliveryDateElement = cartItemContainer.querySelector('.delivery-date');
+            deliveryDateElement.innerHTML = 'Delivery date: ' + selectedDate;
+        });
+    });
+}
+
 export function deleteProduct(products, cart, delBtn) {
     var id = delBtn.dataset.productId;
     var quantity=parseInt(delBtn.dataset.productQuantity);
@@ -373,10 +275,10 @@ export function deleteProduct(products, cart, delBtn) {
     calcPriceSummary(products);
     location.reload();
 }
+
 export function returnToHome(){
     window.location.href = 'amazon.html';
 }
-
 
 export function displayPriceSummary(priceSummary){
     const paymentSummary=document.querySelector('.payment-summary');
@@ -420,6 +322,7 @@ export function displayPriceSummary(priceSummary){
 
 export function saveLocalStorage(passedData){
     localStorage.setItem('passedData',JSON.stringify(passedData));
+    console.log(passedData);
 }
 
 export function retriveLocalStorage(){

@@ -1,18 +1,18 @@
 export const products = [
-  // {
-  //   id: "e43638ce-6aa0-4b85-b27f-e1d07eb671350",
-  //   image: "images/products/brainImage.jpg",
-  //   name: "Brain",
-  //   rating: {
-  //     stars: "./images/ratings/rating-50.png",
-  //     count: 87
-  //   },
-  //   priceCents: 0,
-  //   keywords: [
-  //     "brain",
-  //     "apparel"
-  //   ]
-  // },
+  {
+    id: "e43638ce-6aa0-4b85-b27f-e1d07eb671350",
+    image: "images/products/brainImage.jpg",
+    name: "Brain",
+    rating: {
+      stars: "./images/ratings/rating-50.png",
+      count: 87
+    },
+    priceCents: 100000,
+    keywords: [
+      "brain",
+      "apparel"
+    ]
+  },
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -383,7 +383,7 @@ export const products = [
       stars: "./images/ratings/rating-45.png",
       count: 2286
     },
-    priceCents: 8300,
+    priceCents: 2782,
     keywords: [
       "garbage",
       "bins",
